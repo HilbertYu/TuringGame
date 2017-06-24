@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 int g_ans_buf[20];
 
 int * g_ans = g_ans_buf + 10;
@@ -19,7 +20,8 @@ enum
     ACT_IF_0,
     ACT_IF_1,
     ACT_LEFT,
-    ACT_RIGHT
+    ACT_RIGHT,
+    ACT_NUM
 };
 
 
@@ -61,12 +63,17 @@ int action(int t_next, int f_next, int act)
 
 }
 
-
 int Next(int n)
 {
     const int col_n = 7;
 
     int nt = (n <= col_n)? n + col_n: n - col_n;
+    int act = g_acts[n];
+
+    int node_if =
+        (act == ACT_IF_B) ||
+        (act == ACT_IF_0) ||
+        (act == ACT_IF_1);
 
     // printf("n = %d, act=%d, nt = %d, g_idx = %d\n"
     //         ,n
